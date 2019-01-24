@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>=^•.•^=</title>
+	<style>
+		body {
+			margin: 0;
+		}
+		h1{
+			letter-spacing:5px;
+			font-family:"Courier New", Courier, Monospace;
+			text-align:center;
+		}
+		#main {
+			display: -webkit-flex; /* Safari */
+			display: flex;
+			justify-content:space-between;
+			padding-left:7.5%;
+			padding-right:7.5%;
+		}
+		#main div{
+			-webkit-flex: 1; /* Safari 6.1+ */
+			flex: 1;
+			text-align:center;
+			font:23px "Times New Roman", Times, serif;
+		}
+		#main div a{
+			color:black;
+			text-decoration:none;
+		}
+		#descr{
+			text-align:center;
+		}
+		#entry{
+			border-style: none;
+			height: 500px;
+			width: 100%;
+		}
+	</style>
+	<script>
+		var total = 2;
+		var num = Math.floor(Math.random()*total)+ 1;
+		function getEntry(){
+			document.getElementById("entry").src = "blag/" + num + ".html";
+		}
+	</script>
+</head>
+<body onload="getEntry()" >
+	<h1>E M P A R Q B B H D</h1>
+	<br>
+	<div id="main">
+		<div><a href="index.html">Home</a></div>
+		<div>Projects</div>
+		<div><a href="blag.html">Blog</a></div>
+		<div>About</div>
+	</div>
+	<div id="descr">
+		<br/>
+		<h3>Refresh to get another entry!</h3>
+	</div>
+	<div>
+	<iframe id="entry">
+	<p>Sorry, entry fails to load.</p>
+	<p>Here's a cat picture for you:</p>
+	<p><img src="cat1.jpg" alt="=^•.•^=" width=300></img></p>
+	</iframe>
+	</div>
+</body>
+</html>
