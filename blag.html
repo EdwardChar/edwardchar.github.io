@@ -3,46 +3,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>=^•.•^=</title>
+	<link rel="stylesheet" href="style.css">
 	<style>
-		body {
-			margin: 0;
-		}
-		h1{
-			letter-spacing:5px;
-			font-family:"Courier New", Courier, Monospace;
-			text-align:center;
-		}
-		#headImg img{
-			display: block;
-			margin: 0 auto;
-		}
-		#main {
-			display: -webkit-flex; /* Safari */
-			display: flex;
-			justify-content:space-between;
-			padding-left:7.5%;
-			padding-right:7.5%;
-		}
-		#main div{
-			-webkit-flex: 1; /* Safari 6.1+ */
-			flex: 1;
-			text-align:center;
-			font:23px "Times New Roman", Times, serif;
-		}
-		#main div a{
-			color:black;
-			text-decoration:none;
-		}
-		#descr{
-			text-align:center;
-		}
-		
-		#entryBlock{
+		.entryBlock{
 			margin: auto;
 		}
-		#entry{
+		.entry{
 			border-style: none;
-			height: 500px;
+			height: 480px;
 			width: 100%;
 			margin: auto;
 		}
@@ -56,22 +24,22 @@
 	</script>
 </head>
 <body onload="getEntry()" >
-	<div id="headImg">
+	<div class="headImg">
 		<img src="title.jpg" alt="=^•.•^="></img>
 	</div>
 	<br>
-	<div id="main">
+	<div class="main">
 		<div><a href="index.html">Home</a></div>
-		<div>Projects</div>
+		<div><a href="projects.html">Projects</a></div>
 		<div><a href="blag.html">Blog</a></div>
 		<div><a href="https://edchar.newgrounds.com/">About</a></div>
 	</div>
-	<div id="descr">
+	<div class="descr">
 		<br/>
 		<h3>Refresh to get another entry!</h3>
 	</div>
-	<div id="entryBlock">
-	<iframe id="entry">
+	<div class="entryBlock">
+	<iframe id="entry" class="entry">
 	<p>Sorry, entry fails to load.</p>
 	<p>Here's a cat picture for you:</p>
 	<p><img src="cat1.jpg" alt="=^•.•^=" width=300></img></p>
