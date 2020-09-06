@@ -1,0 +1,106 @@
+<!-- 神秘链接 -->
+<!-- https://www.bilibili.com/video/BV1Px411w7FH -->
+<!DOCTYPE html>
+<html>
+    <head><style>
+		p{
+            text-align: center;
+        }
+        .main{
+            font-size: 3em;
+            font-weight: bold;
+        }
+	</style>
+	</script>
+        <script>
+            let list = [
+                "剑",
+                "魔法",
+                "地下城",
+                "机器人",
+                "公主",
+                "操作系统",
+                "编译器",
+                "计算机图形学",
+                "大舰巨炮",
+                "钻头",
+                "高达",
+                "机甲",
+                "狙击步枪",
+                "手动挡跑车",
+                "豆腐火腩饭",
+                "vtuber",
+                "猫猫",
+                "变身",
+                "女装",
+                "啤酒",
+                "烤串",
+                "越野",
+                "生物",
+                "化学",
+                "环境工程",
+                "材料",
+                "HTML",
+                "JavaScript",
+                "CSS",
+                "React",
+                "Vue",
+                "Angular",
+                "PHP",
+                "C",
+                "Java",
+                "C++",
+                "C#",
+                "Python",
+                "数据结构",
+                "算法",
+                "面向对象",
+                "继承",
+                "封装",
+                "多态",
+                "东方Project",
+                "偶像大师",
+                "Vocaloid",
+                "道琼斯",
+                "纳斯达克",
+                "标普",
+                "百度",
+                "阿里巴巴",
+                "腾讯",
+                "人工智能",
+                "5G",
+                "物联网",
+                "FPS",
+                "RTS",
+                "AVG",
+                "RPG",
+                "ACT",
+                "语文",
+                "数学",
+                "英语",
+                "CPU",
+                "显卡",
+                "内存",
+                "机械键盘"
+            ];
+            for(let i = list.length - 1; i > 0; i--){
+                const j = Math.floor(Math.random() * (i + 1))
+                const temp = list[i]
+                list[i] = list[j]
+                list[j] = temp
+            }
+            let a = `${list[0]}，${list[1]}，${list[2]}`; 
+            loaded = () => document.getElementById("ans").innerText = a;
+        </script>
+    </head>
+    <body onload="loaded();">
+        <p class="main">
+            &nbsp;&nbsp;&nbsp;男人的三大浪漫：
+        </p>
+        <p id="ans" class="main"></p>
+        <p>
+            （刷新有惊喜）
+        </p>
+    </body>
+    
+</html>
