@@ -12,6 +12,9 @@
                 font-size: 3em;
                 font-weight: bold;
             }
+            button{
+                font-size: 2em;
+            }
 	    </style>
 	</script>
         <script>
@@ -49,7 +52,7 @@
                 "Vue",
                 "Angular",
                 "PHP",
-                "C语言",
+                "C",
                 "Java",
                 "C++",
                 "C#",
@@ -85,16 +88,18 @@
                 "内存",
                 "机械键盘"
             ];
-            for(let i = list.length - 1; i > 0; i--){
-                const j = Math.floor(Math.random() * (i + 1))
-                const temp = list[i]
-                list[i] = list[j]
-                list[j] = temp
+            loaded = () => {
+                for(let i = list.length - 1; i > 0; i--){
+                    const j = Math.floor(Math.random() * (i + 1))
+                    const temp = list[i]
+                    list[i] = list[j]
+                    list[j] = temp
+                }
+                let a = `${list[0]}，${list[1]}，${list[2]}`; 
+                let b = `${list[0]}，${list[0]}，${list[0]}`; 
+                let c = Math.random() > 0.1 ? a : b;
+                document.getElementById("ans").innerText = c;
             }
-            let a = `${list[0]}，${list[1]}，${list[2]}`; 
-            let b = `${list[0]}，${list[0]}，${list[0]}`; 
-            let c = Math.random() > 0.2 ? a : b;
-            loaded = () => document.getElementById("ans").innerText = c;
         </script>
     </head>
     <body onload="loaded();">
@@ -103,7 +108,9 @@
         </p>
         <p id="ans" class="main"></p>
         <p>
-            （刷新有惊喜）
+            <button onclick="loaded();">
+                换一换
+            </button>
         </p>
     </body>
     
