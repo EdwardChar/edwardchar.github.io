@@ -2,15 +2,17 @@
 <!-- https://www.bilibili.com/video/BV1Px411w7FH -->
 <!DOCTYPE html>
 <html>
-    <head><style>
-		p{
-            text-align: center;
-        }
-        .main{
-            font-size: 3em;
-            font-weight: bold;
-        }
-	</style>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            p{
+                text-align: center;
+            }
+            .main{
+                font-size: 3em;
+                font-weight: bold;
+            }
+	    </style>
 	</script>
         <script>
             let list = [
@@ -90,7 +92,9 @@
                 list[j] = temp
             }
             let a = `${list[0]}，${list[1]}，${list[2]}`; 
-            loaded = () => document.getElementById("ans").innerText = a;
+            let b = `${list[0]}，${list[0]}，${list[0]}`; 
+            let c = Math.random() > 0.1 ? a : b;
+            loaded = () => document.getElementById("ans").innerText = c;
         </script>
     </head>
     <body onload="loaded();">
