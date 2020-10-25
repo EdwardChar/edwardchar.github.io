@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- Studying Abroad Simulator --> 
+<!-- A short game by EdwardChar -->
+<html>
+    <head>
+        <title>留学模拟器</title>
+        <link rel="stylesheet" href="main.css" />
+        <script>
+            const choices = [
+                {
+                    "action" : "看漫画" , 
+                    "result" : [
+                        "看着漫画里主人公的遭遇，你想起了你在中学时被霸凌的经历。",
+                        "哎，如今的轻改漫也就这样了。",
+                        "呼呼。。。还是给女人画的漫画好看呐！"
+                    ],
+                    "score" : [-15,0,10]
+                },
+                {
+                    "action" : "玩联机游戏" , 
+                    "result" : [
+                        "你和你的朋友们整蛊对面玩家，对面玩家用你steam上的名字骂你。ä那个名字是别人的。",
+                        "你感觉你破解了这个游戏，马上变得索然无味。",
+                        "你的死亡画面被你的朋友们p成搞笑图片。"
+                    ],
+                    "score" : [20,5,-10]
+                },
+                {
+                    "action" : "出去走走" , 
+                    "result" : [
+                        "你在凌晨四点的大街上乱转。ä你拍了张照片发给qq群友，群友说你像痴汉。",
+                        "外面冷得要死，你很快就回来了。ä为此你在qq群里骂了几句街。",
+                        "哼哼，街头健身，随时随地健身，加油，奥力给！！！"
+                    ],
+                    "score" : [-15,0,10]
+                },
+                {
+                    "action" : "和朋友约饭" , 
+                    "result" : [
+                        "你把你朋友的鸡巴样子发到了群里，引起了一波复读。",
+                        "你和朋友录小视频的时候你的朋友说了一些不可说的东西——这可没法发到网上。",
+                        "你随口说的一句话被无意中录了下来，承包了群友们一星期的笑点。"
+                    ],
+                    "score" : [10,0,-15]
+                },
+                {
+                    "action" : "聊qq" , 
+                    "result" : [
+                        "你被群友写打油诗整蛊。",
+                        "只有一帮僵尸一样的闲杂人员在聊天。无聊。",
+                        "你和你的群友们网络霸凌了群里的一个富二代。"
+                    ],
+                    "score" : [-15,0,10]
+                },
+                {
+                    "action" : "看动画" , 
+                    "result" : [
+                        "你随着动漫主题曲做出夸张的动作，最终不慎撞到了椅子上，摔倒在地。",
+                        "一月番？？？就这？？？",
+                        "哼哼，只有我们高贵的动漫婆罗门才看得懂这样有深度的作品！"
+                    ],
+                    "score" : [-15,0,20]
+                },
+                {
+                    "action" : "玩单机游戏" , 
+                    "result" : [
+                        "你和群友讨论游戏，被剧透了一脸。",
+                        "傻逼游戏。",
+                        "哼哼，只有我们高贵的游戏婆罗门才懂得欣赏这样有内涵的独立游戏！"
+                    ],
+                    "score" : [-20,-5,20]
+                },
+            ]
+            
+            let mentalHealth = 0;
+            let i = 0;
+
+            typeWriter = (element, text, callBack) => {
+                if (i < text.length) {
+                    if (text.charAt(i) == 'ä')
+                        element.innerHTML += "<br />";
+                    else
+                        element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50, element, text, callBack);
+                }
+                else if(i == text.length){
+                    i = 0;
+                    callBack();
+                }
+            }
+
+            opening = () => {
+                document.querySelector(".info").style.display = "none";
+                h1 = document.createElement("h1");
+                h1.innerHTML = "留学模拟器";
+                document.querySelector(".main_area").appendChild(h1);
+                start = document.createElement("button");
+                start.innerHTML = "Start";
+                start.addEventListener("click", ask);
+                document.querySelector(".main_area").appendChild(start);
+            }
+
+            ask = () => {
+                document.querySelector(".info").style.display = "block";
+                document.querySelector(".main_area").innerHTML = "";
+                let bored = document.createElement("p");
+                choices.sort(() => Math.random() - 0.5);
+                document.querySelector(".main_area").appendChild(bored);
+                let choice1 = document.createElement("button");
+                choice1.innerHTML = choices[0].action;
+                document.querySelector(".main_area").appendChild(choice1);
+                let choice2 = document.createElement("button");
+                choice2.innerHTML = choices[1].action;
+                document.querySelector(".main_area").appendChild(choice2);
+                let choice3 = document.createElement("button");
+                choice3.innerHTML = choices[2].action;
+                document.querySelector(".main_area").appendChild(choice3);
+                typeWriter(bored, "无聊。", () => {
+                    choice1.addEventListener("click", () => answer(choices[0]));
+                    choice2.addEventListener("click", () => answer(choices[1]));
+                    choice3.addEventListener("click", () => answer(choices[2]));
+                });
+            }
+
+            answer = (choice) =>{
+                document.querySelector(".main_area").innerHTML = "";
+                let resultDiv = document.createElement("div");
+                resultDiv.className = "results";
+                let resultp = document.createElement("p");
+                let no = Math.floor((Math.random()*2.99))
+                resultDiv.appendChild(resultp);
+                document.querySelector(".main_area").appendChild(resultDiv);
+                let scorep = document.createElement("p");
+                scorep.innerHTML = "得分：" + choice.score[no];
+                mentalHealth += choice.score[no];
+                let health = document.getElementById("health");
+                health.innerHTML = mentalHealth;
+                document.querySelector(".main_area").appendChild(scorep);
+                let back = document.createElement("button");
+                back.innerHTML = "睡觉";
+                document.querySelector(".main_area").appendChild(back);
+                typeWriter(resultp, choice.result[no],() => {
+                    back.addEventListener("click", ask);
+                });
+            }
+            
+
+
+        </script>
+    </head>
+    <body onload="opening()">
+        <div class="game">
+            <p class="info" id="info">自我感觉良好程度：<span id="health">0</span></p>
+            <div class="main_area">    
+            </div>
+        </div>
+    </body>
+</html>
