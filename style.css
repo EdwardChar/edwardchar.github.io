@@ -1,5 +1,5 @@
 body {
-    margin: 7px;
+    margin: 2.5% 20% 0;
 }
 h1{
     letter-spacing:5px;
@@ -14,8 +14,7 @@ h1{
     display: -webkit-flex; /* Safari */
     display: flex;
     justify-content:space-between;
-    padding-left:7.5%;
-    padding-right:7.5%;
+    padding: 10px 7.5% 0px
 }
 .main div{
     -webkit-flex: 1; /* Safari 6.1+ */
@@ -30,7 +29,6 @@ h1{
 .cont{
     font-size:25px;
     font-weight:bold;
-    padding: 50px 7%;
 }
 .blurry {
     color: transparent;
@@ -45,7 +43,7 @@ footer{
     position: fixed;
     height: 30px;
     bottom: 30px;
-    width: 100%;
+    width: 60%;
 }
 
 footer div{
