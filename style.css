@@ -31,15 +31,9 @@ h1{
     font-size:25px;
     font-weight:bold;
 }
-.blurry {
-    color: transparent;
-    text-shadow: 0 0 7px #000000;
-    transition: text-shadow 1s cubic-bezier(0, 1, 0, 1);
+.falling {
+    position: relative;
   }
-.blurry:hover {
-    text-shadow: 0 0 0 #000000;
-}
-
 footer{
     position: fixed;
     height: 30px;

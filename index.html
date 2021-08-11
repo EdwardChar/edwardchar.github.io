@@ -16,7 +16,38 @@
 		<div><a href="#" onclick="alert('WIP');">About</a></div>
 	</div>
 	<div class="cont">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris scelerisque ultricies est ut consectetur. Donec sed nulla lectus. Nam nibh leo, viverra vel magna sit amet, ac <span class="blurry">Hey.</span> san venenatis nibh. Fusce semper hendrerit nisi sit amet ornare. Quisque vulputate urna nec ipsum posuere, vel pharetra tellus condimentum. Cras ut urna fringilla, aliquam ante ac, semper lorem. Donec lacinia non neque quis aliquam. Sed orci est, mattis nec justo non, blandit euismod nunc. Fusce <span class="blurry">Glad you found this site.</span> dolor, eget ultrices nibh commodo ornare. Aliquam sagittis et libero id tempus. Sed ullamcorper mauris at enim ultrices accumsan. Nulla venenatis, massa sed euismod consequat, tellus eros porta justo, a pharetra lorem lacus quis <span class="blurry">Feel free to look around.</span> metus nibh, et vestibulum metus venenatis viverra. Suspendisse ligula leo, auctor ac enim non, fermentum venenatis sapien. </p>
+		<p><span class="fallable">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris scelerisque ultricies est ut consectetur. Donec sed nulla lectus. Nam nibh leo, viverra vel magna sit amet, ac</span> Hey. <span class="fallable">san venenatis nibh. Fusce semper hendrerit nisi sit amet ornare. Quisque vulputate urna nec ipsum posuere,  vel pharetra tellus condimentum. Cras ut urna fringilla,  aliquam ante ac, semper lorem. Donec lacinia non neque quis aliquam. Sed orci est, mattis nec justo non, blandit euismod nunc. Fusce</span> Glad you found this site. <span class="fallable">dolor, eget ultrices nibh commodo ornare. Aliquam sagittis et libero id tempus. Sed ullamcorper mauris at enim ultrices accumsan. Nulla venenatis, massa sed euismod consequat, tellus eros porta justo, a pharetra lorem lacus quis</span> Feel free to look around. <span class="fallable">metus nibh, et vestibulum metus venenatis viverra. Suspendisse ligula leo, auctor ac enim non, fermentum venenatis sapien.</span> </p>
 	</div>
+	<script>
+		splitter = (text, destNode) => {
+			words = text.split(" ");
+			destNode.innerHTML = "";
+			for(word of words){
+				let node = document.createElement("span");
+				node.innerHTML = word + " ";
+				node.setAttribute("class", "falling");
+				let y = 0;
+				let t = 0;
+				let fall = (event) => {
+					setInterval(() => {
+						if(y < 8000){		
+							y = t * t;
+							t++;
+						}
+						event.target.style.top = y / 2 + "px";
+					}, 20) 
+					
+				};
+				node.addEventListener("mouseenter", fall);
+				destNode.appendChild(node);
+			}
+			 
+		} 
+		
+		fallables = document.querySelectorAll(".fallable");
+		for (fallable of fallables) {
+			splitter(fallable.innerHTML, fallable);
+		}
+	</script>
 </body>
 </html>
