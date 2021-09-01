@@ -35,6 +35,7 @@
 							t++;
 						}
 						event.target.style.top = y / 2 + "px";
+						event.target.removeEventListener("mouseenter", fall)
 					}, 20) 
 					
 				};
