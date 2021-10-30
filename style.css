@@ -1,5 +1,5 @@
 body {
-    margin: 2.5% 20% 0;
+    margin: 5px 20% 0;
     overflow: hidden;
 }
 h1{
@@ -14,18 +14,20 @@ h1{
 .main {
     display: -webkit-flex; /* Safari */
     display: flex;
-    justify-content:space-between;
-    padding: 10px 7.5% 0px
+    justify-content:space-between; 
+    position: relative;
+    right: 30%;
+    width: 50%;
 }
 .main div{
     -webkit-flex: 1; /* Safari 6.1+ */
     flex: 1;
-    text-align:center;
+    text-align: center;
     font:23px "Times New Roman", Times, serif;
 }
 .main div a{
     color:black;
-    text-decoration:none
+    text-decoration: underline dotted
 }
 .cont{
     font-size:25px;
