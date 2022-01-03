@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This Modrian's Painting Does Not Exist</title>
+        <style>
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #555555;
+                height: 100vh;
+            }
+            canvas{
+                display: block;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="bg"></canvas>
+        <script>
+            const bg = document.getElementById("bg");
+            let width = 640;
+            let height = 640;
+            bg.width = width;
+            bg.height = height;
+            const ctx = bg.getContext("2d");
+            ctx.lineWidth = 10;
+            let min = 30;
+            let row = Math.floor(Math.random() * 5) + 3;
+            let col = Math.floor(Math.random() * 5) + 3;
+            let vert = []; 
+            for(let i = 0; i < row - 1; i++){
+                rand = Math.floor(Math.random() * (height - min * col));
+                vert.push(rand);
+            }
+            vert.sort((a, b) => a - b);
+            for(let i = 0; i < vert.length; i++){
+                vert[i] += min + i * min; 
+            }
+            let hori = []; 
+            for(let i = 0; i < col - 1; i++){
+                rand = Math.floor(Math.random() * (width - min * row));
+                hori.push(rand);
+            }
+            hori.sort((a, b) => a - b);
+            for(let i = 0; i < hori.length; i++){
+                hori[i] += min + i * min; 
+            }
+            colors = ["#3c4783", "#fbd100", "#d42728", "#3c4783", "#fbd100", "#d42728", "#000000"];
+            let line = (x, y, xend, yend) => {
+                rand = Math.random();
+                if(rand > 0.7){
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(xend, yend);
+                    ctx.stroke();
+                }
+            }
+            let max = Math.random() * hori.length * vert.length / 4 + 1;
+            for(let k = 0; k < max; k++){
+                let i = Math.floor(Math.random() * (hori.length - 2));
+                let j = Math.floor(Math.random() * (vert.length - 2));
+                let idx = Math.floor(Math.random() * 60) % colors.length; 
+                let d = Math.floor(Math.random() * 2) + 1; 
+                ctx.fillStyle = colors[idx];
+                ctx.strokeRect(hori[i], vert[j], hori[i + d] - hori[i], vert[j + d] - vert[j]);
+                ctx.fillRect(hori[i] + 5, vert[j] + 5, hori[i + d] - hori[i] - 10, vert[j + d] - vert[j] - 10);
+                line(hori[i], vert[j], hori[i], 0);
+                line(hori[i], vert[j], hori[i], height);
+                line(hori[i], vert[j], 0, vert[j]);
+                line(hori[i], vert[j], width, vert[j]);
+                line(hori[i + d], vert[j + d], hori[i + d], 0);
+                line(hori[i + d], vert[j + d], hori[i + d], height);
+                line(hori[i + d], vert[j + d], 0, vert[j + d]);
+                line(hori[i + d], vert[j + d], width, vert[j + d]);
+            }
+        </script>
+    </body>
+</html>
