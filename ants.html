@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Langton's Ant</title>
+        <style>
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #555555;
+                height: 100vh;
+            }
+            canvas{
+                display: block;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="bg"></canvas>
+        <script>
+            // To deal with index boundaries
+            let cycle = (idx, max) => {
+                return (idx + max) % max;
+            }
+
+            const bg = document.getElementById("bg");
+            const width = 640;
+            const height = 640;
+            const step = 4;
+            bg.width = width;
+            bg.height = height;
+            const ctx = bg.getContext("2d");
+            let antx = width / 2;
+            let anty = height / 2;
+            const dirs = [[0, 0 - step], [step, 0], [0, step], [0 - step, 0]];
+            let dir = 0;
+
+            // dir can be negative or larger than 3
+            let move = (dir) => {
+                dir = cycle(dir, dirs.length);
+                antx += dirs[dir][0];
+                anty += dirs[dir][1];
+                antx = cycle(antx, width);
+                anty = cycle(anty, height);
+                return dir;
+            }
+ 
+            process = () => {
+                let color = ctx.getImageData(antx, anty, 1, 1).data; 
+                if(color[1] > 0){
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(antx, anty, step, step);
+                    dir = move(dir - 1);
+                }
+                else{
+                    ctx.fillStyle = "white";
+                    ctx.fillRect(antx, anty, step, step);
+                    dir = move(dir + 1);
+                }
+                color = ctx.getImageData(antx, anty, 1, 1).data; 
+                if(color[1] > 0){
+                    ctx.fillStyle = "#FF0100";
+                    ctx.fillRect(antx, anty, step, step);
+                }
+                else{ 
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(antx, anty, step, step);
+                }
+            }
+            setInterval(process, 20);
+        </script>
+    </body>
+</html>
