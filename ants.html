@@ -50,18 +50,21 @@
                 anty = cycle(anty, height);
                 return dir;
             }
+            
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, width, height);
  
             process = () => {
-                let color = ctx.getImageData(antx, anty, 1, 1).data; 
+                var color = ctx.getImageData(antx, anty, 1, 1).data; 
                 if(color[1] > 0){
                     ctx.fillStyle = "black";
                     ctx.fillRect(antx, anty, step, step);
-                    dir = move(dir - 1);
+                    dir = move(dir + 1);
                 }
                 else{
                     ctx.fillStyle = "white";
                     ctx.fillRect(antx, anty, step, step);
-                    dir = move(dir + 1);
+                    dir = move(dir - 1);
                 }
                 color = ctx.getImageData(antx, anty, 1, 1).data; 
                 if(color[1] > 0){
