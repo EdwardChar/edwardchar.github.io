@@ -55,6 +55,7 @@
             ctx.fillRect(0, 0, width, height);
  
             process = () => {
+                // Flip the color of the current cell, then move to next cell
                 var color = ctx.getImageData(antx, anty, 1, 1).data; 
                 if(color[1] > 0){
                     ctx.fillStyle = "black";
@@ -66,6 +67,7 @@
                     ctx.fillRect(antx, anty, step, step);
                     dir = move(dir - 1);
                 }
+                // Mark the position of ant with red
                 color = ctx.getImageData(antx, anty, 1, 1).data; 
                 if(color[1] > 0){
                     ctx.fillStyle = "#FF0100";
