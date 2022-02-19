@@ -19,10 +19,14 @@
                 display: block;
                 background-color: white;
             }
+            #temp{
+                display: none;
+            }
         </style>
     </head>
     <body>
         <canvas id="bg"></canvas>
+        <canvas id="temp"></canvas>
         <script>
             // To deal with index boundaries
             let cycle = (idx, max) => {
@@ -30,17 +34,25 @@
             }
 
             const bg = document.getElementById("bg");
-            const width = 640;
-            const height = 640;
-            const step = 4;
-            bg.width = width;
-            bg.height = height;
+            const temp = document.getElementById("temp");
             const ctx = bg.getContext("2d");
+            const ctempx = temp.getContext("2d");
+            const bgWidth = 640;
+            const bgHeight = 640;
+            const size = 2;
+            const speed = 100;
+            bg.width = bgWidth;
+            bg.height = bgHeight;
+            temp.width = bgWidth;
+            temp.height = bgHeight;
+            const width = bgWidth / size;
+            const height = bgHeight / size;
             let antx = width / 2;
             let anty = height / 2;
-            const dirs = [[0, 0 - step], [step, 0], [0, step], [0 - step, 0]];
+            const dirs = [[0,-1], [1, 0], [0, 1], [-1, 0]];
             let dir = 0;
-
+            // Array tricks
+            let grid = new Array(height).fill(0).map(_ => new Array(width).fill(1)); 
             // dir can be negative or larger than 3
             let move = (dir) => {
                 dir = cycle(dir, dirs.length);
@@ -52,33 +64,49 @@
             }
             
             ctx.fillStyle = "white";
-            ctx.fillRect(0, 0, width, height);
- 
-            process = () => {
+            ctx.fillRect(0, 0, bgWidth, bgHeight);
+            ctx.scale(size, size);
+            ctx.imageSmoothingEnabled = false;
+
+            process = () => { 
+                let px = grid[anty][antx];
                 // Flip the color of the current cell, then move to next cell
-                var color = ctx.getImageData(antx, anty, 1, 1).data; 
-                if(color[1] > 0){
-                    ctx.fillStyle = "black";
-                    ctx.fillRect(antx, anty, step, step);
+                if(px > 0){
+                    grid[anty][antx] = 0;
                     dir = move(dir + 1);
                 }
                 else{
-                    ctx.fillStyle = "white";
-                    ctx.fillRect(antx, anty, step, step);
+                    grid[anty][antx] = 7;
                     dir = move(dir - 1);
                 }
+            }
+            intToColor = (px) => {
+                // Dirty modulo hack here!
+                // Cell value -> color:
+                // 0 -> black [0, 0, 0] * 255
+                // 7 -> white [1, 1, 1] * 255
+                // 3 -> red [1, 0, 0] * 255
+                // The last byte is alpha, if you don't already know
+                return [px % 2 * 255, px % 3 * 255, px % 3 * 255, 255]
+            } 
+            paint = () => {
                 // Mark the position of ant with red
-                color = ctx.getImageData(antx, anty, 1, 1).data; 
-                if(color[1] > 0){
-                    ctx.fillStyle = "#FF0100";
-                    ctx.fillRect(antx, anty, step, step);
-                }
-                else{ 
-                    ctx.fillStyle = "red";
-                    ctx.fillRect(antx, anty, step, step);
+                let tmp = grid[anty][antx];
+                grid[anty][antx] = 3;
+                let bytes = grid.flat().map(intToColor).flat();
+                imgData = new ImageData(Uint8ClampedArray.from(bytes), width, height);
+                grid[anty][antx] = tmp;
+                ctempx.putImageData(imgData, 0, 0);
+                ctx.drawImage(temp, 0, 0);
+            }
+            // calculate multiple steps before rendering
+            calc = () => {
+                for(let i = 0; i < speed; i++){
+                    process();
                 }
             }
-            setInterval(process, 20);
+            setInterval(calc, 20);
+            setInterval(paint, 20);
         </script>
     </body>
 </html>
