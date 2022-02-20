@@ -90,6 +90,7 @@
                 return [px % 2 * 255, px % 3 * 255, px % 3 * 255, 255]
             } 
             paint = () => {
+                calc();
                 // Mark the position of ant with red
                 let tmp = grid[anty][antx];
                 grid[anty][antx] = 3;
@@ -104,8 +105,7 @@
                 for(let i = 0; i < speed; i++){
                     process();
                 }
-            }
-            setInterval(calc, 20);
+            } 
             setInterval(paint, 20);
         </script>
     </body>
