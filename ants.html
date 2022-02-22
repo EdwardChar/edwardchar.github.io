@@ -31,8 +31,7 @@
             // To deal with index boundaries
             let cycle = (idx, max) => {
                 return (idx + max) % max;
-            }
-
+            } 
             const bg = document.getElementById("bg");
             const temp = document.getElementById("temp");
             const ctx = bg.getContext("2d");
@@ -68,7 +67,7 @@
             ctx.scale(size, size);
             ctx.imageSmoothingEnabled = false;
 
-            process = () => { 
+            step = () => { 
                 let px = grid[anty][antx];
                 // Flip the color of the current cell, then move to next cell
                 if(px > 0){
@@ -90,7 +89,10 @@
                 return [px % 2 * 255, px % 3 * 255, px % 3 * 255, 255]
             } 
             paint = () => {
-                calc();
+                // calculate multiple steps before rendering 
+                for(let i = 0; i < speed; i++){
+                    step();
+                }  
                 // Mark the position of ant with red
                 let tmp = grid[anty][antx];
                 grid[anty][antx] = 3;
@@ -99,12 +101,6 @@
                 grid[anty][antx] = tmp;
                 ctempx.putImageData(imgData, 0, 0);
                 ctx.drawImage(temp, 0, 0);
-            }
-            // calculate multiple steps before rendering
-            calc = () => {
-                for(let i = 0; i < speed; i++){
-                    process();
-                }
             } 
             setInterval(paint, 20);
         </script>
