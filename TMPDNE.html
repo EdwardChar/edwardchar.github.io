@@ -30,6 +30,8 @@
             bg.height = height;
             const ctx = bg.getContext("2d");
             ctx.lineWidth = 10;
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, width, height);
             let min = 30;
             let row = Math.floor(Math.random() * 5) + 3;
             let col = Math.floor(Math.random() * 5) + 3;
